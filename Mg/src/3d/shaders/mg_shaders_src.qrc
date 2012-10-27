@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>blend/blend.fsh</file>
+        <file>blur/hblur.fsh</file>
+        <file>blur/vblur.fsh</file>
+        <file>fbodisplay/fbodisplay.fsh</file>
+        <file>fbodisplay/fbodisplay.vsh</file>
+        <file>filters/alphafilter.fsh</file>
+        <file>test/test.fsh</file>
+        <file>test/test.vsh</file>
+        <file>fbodisplay/texturedraw.vsh</file>
+        <file>antialiasing/antialiasing.fsh</file>
+        <file>bumpmapping/bumpmapping.fsh</file>
+        <file>bumpmapping/bumpmapping.vsh</file>
+        <file>filters/colorfilter.fsh</file>
+    </qresource>
+</RCC>

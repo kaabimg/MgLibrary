@@ -1,0 +1,39 @@
+I- Dependent libraries:
+- Qt
+- Qt3D (provided with Qt 5.0 or downloadable from Qt git as a standalone library)
+- QtPropertyEditor (Qt solution, downloadable from Qt git as a standalone library)
+
+
+
+II-Project variables 
+
+1- Modify PROJECT_CONFIG in mglibrary.pri :
+	debug : for a debug install 
+	release : for a release install
+	
+2- Set the following variables in mgexternallibs.pri	
+   QT_PROPERTY_EDITOR_EDITOR_INCLUDE_DIR
+   QT_PROPERTY_EDITOR_EDITOR_LIB_DIR
+  for QtPropertyEditor install 
+   QT3D_INCLUDE_DIR
+   QT3D_LIB_DIR
+  for Qt3D install 
+  
+  
+  
+ III-Install
+ 1- cd MgLibPath/tools/includesbuilder
+    path/to/qt/bin/qmake
+    make
+    launch MgLibPath/bin/bin/MgIncludeBuilder
+    or
+    launch MgLibPath/bin/bin/MgIncludeBuilder.debug (if in debug mode)
+  	
+ 2- cd  MgLibPath
+    path/to/qt/bin/qmake
+    make
+    
+    Binaries are located in MgLibPath/bin/bin/
+    Libraries are located in MgLibPath/bin/lib
+    
+     	
