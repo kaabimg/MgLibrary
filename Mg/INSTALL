@@ -1,8 +1,7 @@
 I- Dependent libraries:
-- Qt
+- Qt (4.7 or higher)
 - Qt3D (provided with Qt 5.0 or downloadable from Qt git as a standalone library)
 - QtPropertyEditor (Qt solution, downloadable from Qt git as a standalone library)
-
 
 
 II-Project variables 
