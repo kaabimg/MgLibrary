@@ -72,7 +72,7 @@ contains( MG, mg_3d ){
 	QMAKE_RPATHDIR += $${QT3D_LIB_DIR}
 	
 	INCLUDEPATH += $$QT3D_INCLUDE_DIR
-	LIBS += -L$$QT3D_LIB_DIR -lQt3D
+	LIBS += -L$${QT3D_LIB_DIR} -lQt3D
 }
 
 contains( MG, mg_test ){
