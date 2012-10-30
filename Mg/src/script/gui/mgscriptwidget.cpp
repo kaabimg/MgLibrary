@@ -24,6 +24,7 @@
 
 #include <MgGui/MgNavigationBar>
 #include <QVBoxLayout>
+#include <QTimer>
 #include <QDebug>
 
 struct MgScriptWidgetPrivate
@@ -32,6 +33,7 @@ struct MgScriptWidgetPrivate
 	MgWidgetWithNavigationBar * jsEditorWidget;
 	MgCommandPrompt * console;
 	MgJavaScriptEditor * jsEditor;
+	QTimer updateTextTimer;
 };
 
 MgScriptWidget::MgScriptWidget(QWidget * parent):MgAnimatedStackedWidget(parent)
@@ -52,6 +54,11 @@ MgScriptWidget::MgScriptWidget(QWidget * parent):MgAnimatedStackedWidget(parent)
 			this,SLOT(makeConsoleCurrent()));
 	addWidget(d_ptr->jsEditorWidget);
 	setCurrentWidget(d_ptr->consoleWidget);
+
+	d_ptr->updateTextTimer.setInterval(500);
+	d_ptr->updateTextTimer.setSingleShot(true);
+	connect(&d_ptr->updateTextTimer,SIGNAL(timeout()),this,SLOT(updateCachedProgram()));
+	connect(d_ptr->jsEditor,SIGNAL(textChanged()),&d_ptr->updateTextTimer,SLOT(start()));
 }
 
 MgScriptWidget::~MgScriptWidget()
@@ -72,7 +79,7 @@ void MgScriptWidget::setScriptEngine(MgScriptEngine * engine)
 void MgScriptWidget::makeConsoleCurrent()
 {
 	if(d_ptr->console->scriptEngine())
-		d_ptr->console->scriptEngine()->setCachedProgram(d_ptr->jsEditor->toPlainText());
+		d_ptr->console->scriptEngine()->setCachedProgram(scriptProgram());
 
 	slideToWidget(d_ptr->consoleWidget,RightToLeft);
 }
@@ -82,4 +89,13 @@ void MgScriptWidget::makeJavaScriptEditorCurrent()
 		d_ptr->jsEditor->setPlainText(d_ptr->console->scriptEngine()->cachedProgram());
 
 	slideToWidget(d_ptr->jsEditorWidget,LeftToRight);
+}
+QString MgScriptWidget::scriptProgram()const
+{
+	return d_ptr->jsEditor->toPlainText();
+}
+void MgScriptWidget::updateCachedProgram()
+{
+	if(scriptEngine())
+		scriptEngine()->setCachedProgram(scriptProgram());
 }

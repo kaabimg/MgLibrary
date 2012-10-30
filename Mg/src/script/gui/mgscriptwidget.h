@@ -39,9 +39,12 @@ public:
 	MgScriptEngine * scriptEngine()const;
 	void setScriptEngine(MgScriptEngine *);
 
+	QString scriptProgram()const;
+
 protected Q_SLOTS:
 	void makeConsoleCurrent();
 	void makeJavaScriptEditorCurrent();
+	void updateCachedProgram();
 
 private:
 	MG_PRIVATE_CLASS(MgScriptWidget)

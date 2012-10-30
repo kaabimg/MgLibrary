@@ -51,21 +51,24 @@ MgCommandCompleter::CompletionResult MgCommandCompleter::completionOf(const QStr
 		if(!isText && (command[i] == '.'
 				|| command[i] == '('
 				|| command[i] == ')'
-				|| command[i] == ','))
+				|| command[i] == ','
+				|| command[i] == '=')
+				)
 		{
 			if(!currentObject.isEmpty())
 			{
 				objects<<currentObject.trimmed();
 				currentObject.clear();
 			}
-			newObject = (command[i] == '(' || command[i] == ',');
-
+			newObject = (command[i] == '(' || command[i] == ',' || command[i] == '=');
 		}
 		else
 			currentObject+= command[i];
 	}
 	currentObject = currentObject.trimmed();
 	completion.prefix = currentObject;
+
+//	qDebug()<<"currentObject"<<currentObject;
 	QStringList completionStringList;
 
 	if(objects.isEmpty() || newObject )
